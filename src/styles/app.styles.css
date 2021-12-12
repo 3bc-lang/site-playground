@@ -1,0 +1,140 @@
+#app {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 40px 65px;
+}
+
+.main-painel {
+    width: 950px;
+    height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.head-options {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.head-options__options {
+    display: flex;
+    justify-content: space-between;
+    width: 176px;
+}
+
+.head-options__logo {
+    width: 50px;
+    width: 50px;
+}
+
+.head-options__btn {
+    width: 80px;
+    height: 50px;
+    color: var(--font-color);
+    font-size: 16px;
+}
+
+.head-options__run-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    background-color: var(--confirm-color);
+    border-radius: 8px;
+}
+
+.head-options__run-button:hover {
+    box-shadow: 0 0 1em var(--confirm-highlight-color);
+    transition: 0.2s;
+}
+
+.log {
+    height: 550px;
+}
+
+.log__console {
+    width: 100%;
+    height: 500px;
+    background-color: var(--dark-color);
+    color: var(--font-color);
+}
+
+.log__input {
+    display: flex;
+    width: 100%;
+    height: 55px;
+}
+
+.log__text {
+    background-color: #2b2b2b;
+    width: 100%;
+    font-size: 16px;
+    color: var(--font-color);
+}
+
+.log__send-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 14px;
+    height: 55px;
+    width: 105px;
+    background-color: var(--confirm-color);
+    cursor: pointer;
+}
+
+.log__send-button:hover {
+    box-shadow: 0 0 1em var(--confirm-highlight-color);
+    transition: 0.2s;
+}
+
+.secondary-painel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30%;
+    height: 80vh;
+}
+
+.secondary-painel__user-painel {
+    height: 360px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.secondary-painel__options {
+    display: flex;
+    justify-content: space-between;
+}
+
+.secondary-painel__option {
+    background-color: var(--dark-color);
+    border-radius: 6px;
+    color: var(--font-color);
+    height: 45px;
+    width: 120px;
+    font-size: 16px;
+}
+
+.secondary-painel__option:hover {
+    background-color: var(--white-color);
+    color: var(--dark-color);
+    transition: 0.2s
+}
+
+.secondary-painel__file-view {
+    background-color: var(--dark-color);
+    width: 100%;
+    height: 300px;
+}
+
+.secondary-painel__error-log {
+    background-color: var(--dark-color);
+    width: 100%;
+    height: 200px;
+}
