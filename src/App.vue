@@ -1,52 +1,89 @@
-<script>
-import "./styles/reset.css"
-import "./styles/global.css"
-import "./styles/app.styles.css"
-
-</script>
-
 <template>
   <section class="main-painel">
     <section class="head-options">
-      <img class="head-options__logo" alt="3BC Lang logo" src="./assets/logo.png" />
-
+      <Logo/>
       <div class="head-options__options">
-        <button class="head-options__btn head-options__reset-button">Reset</button>
-        <button class="head-options__btn head-options__run-button">
-          <img src="./assets/play-stroked.svg" alt="play button">
-          <p>Run</p>
-        </button>
+        <ButtonClear @click="clear()"/>
+        <ButtonPlay @click="run()"/>
       </div>
     </section>
 
     <section class="log">
-      <textarea class="log__console">print("Hello, world!")</textarea>
-      
-      <div class="log__input">
-        <input class="log__text" type="text">
-
-        <button class="log__send-button">
-          <img class="log__send-button-image" src="./assets/play-solid.svg" alt="play button">
-        </button>
-      </div>
+      <textarea class="log__console" readonly :value="output"/>
+      <!-- <LogInput @send="input=$event"/> -->
     </section>
   </section>
 
   <section class="secondary-painel">
     <div class="secondary-painel__user-painel">
       <div class="secondary-painel__options">
-        <button class="secondary-painel__option">examples</button>
-        <button class="secondary-painel__option">load file</button>
-        <button class="secondary-painel__option">disable file</button>
+        <ButtonExamples/>
+        <ButtonLoadFile/>
       </div>
 
-      <textarea class="secondary-painel__file-view">print("Hello, world!")</textarea>
+      <textarea class="secondary-painel__file-view" v-model="file"/>
     </div>
 
-    <textarea class="secondary-painel__error-log">print("Hello, world!")</textarea>
+    <textarea class="secondary-painel__error-log" :value="debug"/>
   </section>
   
 </template>
+
+<script>
+/** stylesheet **/
+import "./styles/reset.css"
+import "./styles/global.css"
+import "./styles/app.styles.css"
+
+/** components **/
+import ButtonClear from "./components/ButtonClear.vue"
+import ButtonExamples from "./components/ButtonExamples.vue"
+import ButtonLoadFile from "./components/ButtonLoadFile.vue"
+import ButtonPlay from "./components/ButtonPlay.vue"
+import LogInput from "./components/LogInput.vue"
+import Logo from "./components/Logo.vue"
+
+/** Modules **/
+import HyperVisor  from './vm.js'
+
+export default {
+  components: {
+    ButtonClear,
+    ButtonExamples,
+    ButtonLoadFile,
+    ButtonPlay,
+    LogInput,
+    Logo,
+  },
+  data: () => ({
+    input: '',
+    debug: '',
+    output: '',
+    file: 'MODE NILL 0d2\nSTRC NILL \'h\'\nSTRC NILL \'i\'\nSTRC NILL \'!\'\n'
+  }),
+  methods: {
+    clear() {
+      this.debug = ''
+      this.output = ''
+    },
+    run() {
+      const app = this
+      HyperVisor({
+        arguments: app.file? ['script.3bc']: [],
+        stderr(buffer) {
+          app.debug += String.fromCharCode(buffer)
+        },
+        stdout(buffer) {
+          app.output += String.fromCharCode(buffer)
+        },
+        onRuntimeInitialized() {
+          this.FS_createDataFile('.', 'script.3bc', app.file, true)
+        }
+      })
+    },
+  },
+}
+</script>
 
 <style>
 #app {
